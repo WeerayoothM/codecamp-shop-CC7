@@ -5,7 +5,12 @@ import UserContext from '../context/userContext'
 
 function Navbar() {
     const { user, isLogin, setIsLogin, setUser } = useContext(UserContext)
-    console.log(user, 'ieie')
+
+    const logoutUser = () => {
+        setUser(null)
+        setIsLogin(false)
+        alert('You are Logout')
+    }
     return (
         <>
             <nav className="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
@@ -32,16 +37,24 @@ function Navbar() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/cart">Cart</Link>
                             </li>
-                            {!isLogin && <><li className="nav-item">
-                                <Link className="nav-link" to="/login">Login</Link>
-                            </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/register">Register</Link>
-                                </li></>}
+                            {!isLogin &&
+                                <>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/login">Login</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="/register">Register</Link>
+                                    </li>
+                                </>}
                             {isLogin &&
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/register">{user}</Link></li>
-
+                                <>
+                                    <li className="nav-item">
+                                        <Link className="nav-link" to="#">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style={{ color: "white" }}>{user}</span></Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link onClick={logoutUser} className="nav-link" to="/home">Logout</Link>
+                                    </li>
+                                </>
                             }
 
                         </ul>
