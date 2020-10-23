@@ -16,6 +16,7 @@ function Login() {
         e.preventDefault();
         try {
             const res = await axios.post('http://localhost:8000/login', { email, password })
+            setErrorLogin(false)
             context.setIsLogin(true)
             context.setUser(res.data.user.firstName)
             setTimeout(() => history.push('/shopping'), 3000)
